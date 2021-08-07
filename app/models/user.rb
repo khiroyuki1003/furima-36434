@@ -19,5 +19,5 @@ class User < ApplicationRecord
   end
 
   # 英数字混合必須のバリデーション（英字かつ数字）
-  validates :encrypted_password, format:{with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i , message:"Password is invalid. Include both letters and numbers"}
+  validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message:"Password is invalid. Include both letters and numbers"}
 end 
