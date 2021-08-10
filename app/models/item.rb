@@ -1,5 +1,11 @@
 class Item < ApplicationRecord
   belongs_to :user
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :category
+  belongs_to_active_hash :item_status
+  belongs_to_active_hash :delivery_fee_burden
+  belongs_to_active_hash :prefectures
+  belongs_to_active_hash :day_to_ship
 
   with_options presence: true do
     validates :item_name
@@ -11,8 +17,8 @@ class Item < ApplicationRecord
     }
 
     with_options numericality: {other_than: 0, message: "can't be blank"} do
-      validates :item_status_id
       validates :category_id
+      validates :item_status_id
       validates :delivery_fee_burden_id
       validates :prefectures_id
       validates :day_to_ship_id
