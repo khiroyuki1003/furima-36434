@@ -17,7 +17,7 @@ class Item < ApplicationRecord
       less_than_or_equal_to: 9999999
     }
 
-    with_options numericality: {other_than: 0, message: "can't be blank"} do
+    with_options numericality: {other_than: 1, message: "can't be blank"} do
       validates :category_id
       validates :item_status_id
       validates :delivery_fee_burden_id
