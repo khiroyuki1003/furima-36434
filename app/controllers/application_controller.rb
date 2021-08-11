@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth
   before_action :user_data_parameter, if: :devise_controller?
+  before_action :authenticate_user!, except: [:index, :show]
 
 
   private
