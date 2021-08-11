@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :redirect_to_index, only: :new 
 
   def index
+    @item = Item.includes(:user).order("created_at DESC")
   end
 
   def new
