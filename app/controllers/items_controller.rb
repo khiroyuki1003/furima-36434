@@ -18,6 +18,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    
+  end
+
   private
   def redirect_to_index
     unless user_signed_in?
