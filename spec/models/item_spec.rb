@@ -28,13 +28,27 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Item explanation can't be blank")
     end
 
+    # 価格が全角数字では保存できない（現在記述頂いている内容かと存じます。）
+    # 価格が半角英数字混合では保存できない
+    # 価格が半角英字だけでは保存できない
+
     it 'priceが空だと保存できない' do
       @item.price = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
-    it 'priceが半角数値でないと保存できない' do
+    it 'priceが全角数字では保存できない' do
       @item.price = "１２３４５６"
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
+    end
+    it 'priceが半角英数字混合では保存できない' do
+      @item.price = "abc123"
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
+    end
+    it 'priceが半角英字だけでは保存できない' do
+      @item.price = "abcdef"
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
     end
