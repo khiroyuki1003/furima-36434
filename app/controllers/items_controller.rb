@@ -22,6 +22,14 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit
+
+  end
+
+  def update
+
+  end
+
   private
   def redirect_to_index
     unless user_signed_in?
