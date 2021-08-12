@@ -1,0 +1,3 @@
+class ReceiverAddress < ApplicationRecord
+end
+ 
