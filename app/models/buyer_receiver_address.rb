@@ -1,8 +1,9 @@
 class BuyerReceiverAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefectures_id, :city, :house_number, :building_name, :phone_number, :buyer_id
+  attr_accessor :user_id, :item_id, :postal_code, :prefectures_id, :city, :house_number, :building_name, :phone_number, :buyer_id, :token
 
   with_options presence: true do
+    validates :token
     validates :user_id
     validates :item_id
     validates :prefectures_id
