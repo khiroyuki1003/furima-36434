@@ -33,7 +33,7 @@ class BuyersController < ApplicationController
   ##Payjpを利用した決済処理
   def pay_item
     # Gem「payjp」のPayjpクラスのapi_keyインスタンスに秘密鍵を代入
-    Payjp.api_key = "sk_test_602d82cb841a6db045c7de60"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     # Gemのクラスとメソッドで、決済に必要な情報を記述する
     Payjp::Charge.create(
       amount: @item.price, # 商品の値段
@@ -42,4 +42,4 @@ class BuyersController < ApplicationController
     )
   end
 end
- 
+  

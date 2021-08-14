@@ -1,6 +1,6 @@
 const pay = () => {
   // Pay.jpに送る公開鍵をセット
-  Payjp.setPublicKey("pk_test_ef903c758a22f68e70cecf51");
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
   // 送信ボタンの要素を取得
   const submit = document.getElementById("button");
   // 送信ボタンをクリックしたらイベント発火
