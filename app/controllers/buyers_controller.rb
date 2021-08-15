@@ -27,7 +27,7 @@ class BuyersController < ApplicationController
   def buyer_params
     params.require(:buyer_receiver_address).permit(
       :postal_code, :prefectures_id, :city, :house_number, :building_name, :phone_number
-    ).merge(user_id: current_user.id, item_id: @item.id, token: params[:token]) 
+    ).merge(user: current_user, item: @item, token: params[:token]) 
   end
 
   ##Payjpを利用した決済処理
