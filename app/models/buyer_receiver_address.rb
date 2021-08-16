@@ -10,10 +10,10 @@ class BuyerReceiverAddress
     validates :prefectures_id, numericality: {other_than: 1, message: "can't be blank"} 
     validates :city
     validates :house_number
-    validates :phone_number, length: {in: 10..11, message:"Phone number is too short"}
+    validates :phone_number, length: {in: 10..11, message:"is too short"}
   end
 
-  validates :phone_number, format: {with: /\A[0-9]+\z/,message:"Phone number is invalid. Input only number"} 
+  validates :phone_number, format: {with: /\A[0-9]+\z/,message:"is invalid. Input only number"} 
 
   def save
     buyer = Buyer.create(user_id: user_id,item_id: item_id)

@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe BuyerReceiverAddress, type: :model do
   before do
-    @buyer_receiver_address = FactoryBot.build(:buyer_receiver_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @buyer_receiver_address = FactoryBot.build(:buyer_receiver_address, user_id: user.id, item_id: item.id)
   end
 
   describe '商品購入できる時' do 
@@ -16,6 +18,16 @@ RSpec.describe BuyerReceiverAddress, type: :model do
   end
 
   describe '商品購入できない時' do
+    it 'user_idが空では購入できない' do
+      @buyer_receiver_address.user_id = nil
+      @buyer_receiver_address.valid?
+      expect(@buyer_receiver_address.errors.full_messages ).to include("User can't be blank")
+    end
+    it 'item_idが空では購入できない' do
+      @buyer_receiver_address.item_id = nil
+      @buyer_receiver_address.valid?
+      expect(@buyer_receiver_address.errors.full_messages ).to include("Item can't be blank")
+    end
     it 'tokenが無いと購入できない' do
       @buyer_receiver_address.token = ""
       @buyer_receiver_address.valid?
@@ -55,7 +67,7 @@ RSpec.describe BuyerReceiverAddress, type: :model do
       end
     end
 
-    context 'phone_numberが正しくないと購入できない' do
+    context 'phone_numberが正しくないと購入できない' do 
       it 'phone_numberが空だと登録できない' do
         @buyer_receiver_address.phone_number = ""
         @buyer_receiver_address.valid?
@@ -64,12 +76,17 @@ RSpec.describe BuyerReceiverAddress, type: :model do
       it 'phone_numberが9桁以下だと登録できない' do
         @buyer_receiver_address.phone_number = 123456789
         @buyer_receiver_address.valid?
-        expect(@buyer_receiver_address.errors.full_messages ).to include('Phone number Phone number is too short')
+        expect(@buyer_receiver_address.errors.full_messages ).to include('Phone number is too short')
+      end
+      it 'phone_numberが12桁以上だと登録できない' do
+        @buyer_receiver_address.phone_number = 123456789012
+        @buyer_receiver_address.valid?
+        expect(@buyer_receiver_address.errors.full_messages ).to include('Phone number is too short')
       end
       it 'phone_numberが全角だと登録できない' do
         @buyer_receiver_address.phone_number = "１２３４５６７８９０"
         @buyer_receiver_address.valid?
-        expect(@buyer_receiver_address.errors.full_messages ).to include('Phone number Phone number is invalid. Input only number')
+        expect(@buyer_receiver_address.errors.full_messages ).to include('Phone number is invalid. Input only number')
       end
     end
   end

@@ -10,9 +10,6 @@ FactoryBot.define do
     building_name {Faker::Lorem.words(number: 1)}
     phone_number {Faker::Number.between(from: 1000000000, to: 99999999999)}
   
-    association :user
-    association :item
- 
   end
 end
  
