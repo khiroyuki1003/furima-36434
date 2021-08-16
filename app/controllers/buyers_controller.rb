@@ -27,7 +27,7 @@ class BuyersController < ApplicationController
   end
 
   def buy_access_check
-    if (current_user.id != @item.user_id && @item.buyer.present?) || current_user.id == @item.user_id
+    if  @item.buyer.present? || current_user.id == @item.user_id
       redirect_to root_path
     end
   end
