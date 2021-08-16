@@ -35,7 +35,7 @@ RSpec.describe BuyerReceiverAddress, type: :model do
         expect(@buyer_receiver_address.errors.full_messages ).to include("Token can't be blank")
       end
       it 'prefectures_idが選択されていないと購入できない' do
-        @buyer_receiver_address.prefectures_id = "1"
+        @buyer_receiver_address.prefectures_id = 1
         @buyer_receiver_address.valid?
         expect(@buyer_receiver_address.errors.full_messages ).to include("Prefectures can't be blank")
       end
