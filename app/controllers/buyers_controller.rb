@@ -6,7 +6,7 @@ class BuyersController < ApplicationController
   def index
     @buyer_receiver_address = BuyerReceiverAddress.new
   end
-
+ 
   def create
     @buyer_receiver_address = BuyerReceiverAddress.new(buyer_params)
     
@@ -27,7 +27,7 @@ class BuyersController < ApplicationController
   end
 
   def buy_access_check
-    if ( user_signed_in? && current_user.id != @item.user_id && @item.buyer.present? ) || ( user_signed_in? && current_user.id == @item.user_id)
+    if (current_user.id != @item.user_id && @item.buyer.present?) || current_user.id == @item.user_id
       redirect_to root_path
     end
   end
@@ -35,7 +35,7 @@ class BuyersController < ApplicationController
   def buyer_params
     params.require(:buyer_receiver_address).permit(
       :postal_code, :prefectures_id, :city, :house_number, :building_name, :phone_number
-    ).merge(user: current_user, item: @item, token: params[:token]) 
+    ).merge(user_id: current_user.id, item_id: @item.id, token: params[:token]) 
   end
 
   ##Payjpを利用した決済処理
