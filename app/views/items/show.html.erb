@@ -8,13 +8,13 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# itemに紐づくbuyerテーブルのレコードが存在すれば「sold out」を表示する %>
+      <%# itemに紐づくbuyerテーブルのレコードが存在すれば「sold out」を表示する  ※後学の為コメントを残します。%>
       <% if @item.buyer.present? %>
         <div class="sold-out">
           <span>Sold Out!!</span>
         </div>
       <% end %>
-      <%# /itemに紐づくbuyerテーブルのレコードが存在すれば「sold out」を表示する %>
+      <%# /itemに紐づくbuyerテーブルのレコードが存在すれば「sold out」を表示する  ※後学の為コメントを残します。%>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -24,17 +24,17 @@
         <%= @item.delivery_fee_burden.name %>
       </span>
     </div>
-    <%# 商品が売れていなければ（@itemに紐づくbuyerテーブルのレコードが存在しなければ）、表示する。 %>
-    <% if @item.buyer.blank? %>
-      <% if user_signed_in? && current_user == @item.user %>
+    <%# 商品が売れていなければ（@itemに紐づくbuyerテーブルのレコードが存在しなければ）、表示する。  ※後学の為コメントを残します。%>
+    <% if user_signed_in? && @item.buyer.blank? %>
+      <% if current_user == @item.user %>
         <%= link_to "商品の編集",  edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-      <% elsif user_signed_in? %> 
+      <% else %> 
         <%= link_to "購入画面に進む", item_buyers_path(@item.id) ,class:"item-red-btn"%>
       <% end %>
     <% end %>
-    <%# /商品が売れていなければ（@itemに紐づくbuyerテーブルのレコードが存在しなければ）、表示する。 %>
+    <%# /商品が売れていなければ（@itemに紐づくbuyerテーブルのレコードが存在しなければ）、表示する。  ※後学の為コメントを残します。%>
     <div class="item-explain-box">
       <span><%= @item.item_explanation %></span>
     </div>
