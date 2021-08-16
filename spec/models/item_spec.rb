@@ -28,10 +28,6 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Item explanation can't be blank")
     end
 
-    # 価格が全角数字では保存できない（現在記述頂いている内容かと存じます。）
-    # 価格が半角英数字混合では保存できない
-    # 価格が半角英字だけでは保存できない
-
     it 'priceが空だと保存できない' do
       @item.price = ""
       @item.valid?

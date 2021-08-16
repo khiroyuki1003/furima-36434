@@ -40,7 +40,7 @@
 - has_one :buyer
 
 
-##  ReceiverAddressテーブル
+##  ReceiverAddressesテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
@@ -58,7 +58,7 @@
 - belongs_to :buyer
 
 
-##  Buyer
+##  Buyers
 テーブル
 
 | Column | Type   | Options     |
