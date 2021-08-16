@@ -135,14 +135,13 @@
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
 
-              <%# 商品が売れていればsold outを表示しましょう %>
-              <%# 商品購入機能実装後に作業 %>
-              <div class='sold-out'>
-                <span>Sold Out!!</span>
-              </div>
-              <%# //商品購入機能実装後に作業 %>
-              <%# //商品が売れていればsold outを表示しましょう %>
-
+              <%# itemに紐づくbuyerテーブルのレコードが存在すれば「sold out」を表示する %>
+              <% if item.buyer.present? %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
+              <%# /itemに紐づくbuyerテーブルのレコードが存在すれば「sold out」を表示する %>
             </div>
             <div class='item-info'>
               <h3 class='item-name'>

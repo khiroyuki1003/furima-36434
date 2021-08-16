@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :redirect_to_index, only: :new 
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
+  before_action :item_check, only: :edit
  
   def index
     @item = Item.includes(:user).order("created_at DESC")
@@ -60,6 +61,12 @@ class ItemsController < ApplicationController
 
   def user_check
     unless @item.user == current_user
+      redirect_to root_path
+    end
+  end
+
+  def item_check
+    if @item.buyer.present?
       redirect_to root_path
     end
   end

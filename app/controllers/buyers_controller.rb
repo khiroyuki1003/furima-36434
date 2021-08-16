@@ -1,5 +1,7 @@
 class BuyersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
+  before_action :buy_access_check, only: [:index, :create]
 
   def index
     @buyer_receiver_address = BuyerReceiverAddress.new
@@ -22,6 +24,12 @@ class BuyersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def buy_access_check
+    if ( user_signed_in? && current_user.id != @item.user_id && @item.buyer.present? ) || ( user_signed_in? && current_user.id == @item.user_id)
+      redirect_to root_path
+    end
   end
 
   def buyer_params
