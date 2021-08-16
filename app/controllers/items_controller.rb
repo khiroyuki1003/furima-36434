@@ -59,7 +59,7 @@ class ItemsController < ApplicationController
   end
 
   def user_item_check
-    unless @item.user == current_user || @item.buyer.present?
+    unless @item.user == current_user || @item.buyer.blank?
       redirect_to root_path
     end
   end
