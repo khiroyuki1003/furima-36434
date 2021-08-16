@@ -86,6 +86,11 @@ RSpec.describe BuyerReceiverAddress, type: :model do
         @buyer_receiver_address.valid?
         expect(@buyer_receiver_address.errors.full_messages ).to include('Phone number is invalid. Input only number')
       end
+      it 'phone_numberが半角英数混合だと登録できない' do
+        @buyer_receiver_address.phone_number = "123456abcd"
+        @buyer_receiver_address.valid?
+        expect(@buyer_receiver_address.errors.full_messages ).to include('Phone number is invalid. Input only number')
+      end
     end
   end
 end
